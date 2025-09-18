@@ -1,0 +1,40 @@
+package com.denizozgun.hotel_booking_project.controller;
+
+import com.denizozgun.hotel_booking_project.dto.ReservationDto;
+import com.denizozgun.hotel_booking_project.dto.requests.NewReservationDto;
+import com.denizozgun.hotel_booking_project.service.ReservationService;
+import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/reservations")
+public class ReservationController {
+
+    private final ReservationService reservationService;
+
+    public ReservationController(ReservationService reservationService) {
+        this.reservationService = reservationService;
+    }
+
+    @GetMapping(path = "/user/{userId}")
+    public Page<ReservationDto> getReservations(@RequestParam(name = "page", defaultValue = "0") int page,
+                                                @RequestParam(name = "size", defaultValue = "10") int size,
+                                                @PathVariable Long userId) {
+        return reservationService.findAllByUserId(page, size, userId);
+    }
+
+    @PostMapping("/new")
+    public ResponseEntity<List<ReservationDto>> createReservation(@RequestBody NewReservationDto newReservationDto) {
+        return reservationService.save(newReservationDto);
+    }
+
+    @DeleteMapping(path = "/cancel")
+    public HttpStatus cancelReservation(@RequestParam Long... reservationIds) {
+        return reservationService.cancelReservation(reservationIds);
+    }
+
+}
