@@ -1,6 +1,6 @@
 package com.denizozgun.hotel_booking_project.entity;
 
-import com.denizozgun.hotel_booking_project.enumurate.Role;
+import com.denizozgun.hotel_booking_project.enums.Role;
 import jakarta.persistence.*;
 import lombok.*;
 

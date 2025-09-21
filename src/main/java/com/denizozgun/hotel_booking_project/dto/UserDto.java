@@ -1,6 +1,6 @@
 package com.denizozgun.hotel_booking_project.dto;
 
-import com.denizozgun.hotel_booking_project.enumurate.Role;
+import com.denizozgun.hotel_booking_project.enums.Role;
 import lombok.*;
 
 @Getter
